@@ -1,0 +1,6 @@
+<svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="100" fill="#f8f9fa" stroke="#e9ecef" stroke-width="1"/>
+  <polygon points="90,25 110,25 105,40 95,40" fill="#dc143c"/>
+  <text x="100" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#dc143c">AXIS MAX</text>
+  <text x="100" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6c757d">LIFE INSURANCE</text>
+</svg> 

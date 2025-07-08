@@ -1,0 +1,6 @@
+<svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="100" fill="#f8f9fa" stroke="#e9ecef" stroke-width="1"/>
+  <text x="100" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#17a2b8">SIL</text>
+  <text x="100" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6c757d">INTEGRATED MARKETING</text>
+  <rect x="80" y="65" width="40" height="4" fill="#17a2b8"/>
+</svg> 
