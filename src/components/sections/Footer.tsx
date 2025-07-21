@@ -125,7 +125,7 @@ const Footer: React.FC = () => {
                 to="/terms-and-conditions"
                 className="text-white text-xs md:text-md cursor-pointer"
               >
-                TERMS & CONDITIONS
+                PRIVACY POLICY
               </Link>{" "}
           </div>
         </div>

@@ -8,35 +8,35 @@ const TermsAndCondition = () => {
   const handleGoHome = () => {
     navigate("/");
   };
-  
+
   return (
     <div
       className="min-h-screen"
-      style={{ fontFamily: "Alta, Arial, sans-serif" }}
+      
     >
-      <button
-        onClick={handleGoHome}
-        className="absolute top-2 left-4 md:left-8 flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-200 group"
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="group-hover:transform group-hover:-translate-x-1 transition-transform duration-200"
+      <main className="pt-8 pb-5 px-4 md:px-8 max-w-4xl mx-auto" style={{ fontFamily: "Alta, Arial, sans-serif" }}>
+        <button
+          onClick={handleGoHome}
+          className="top-8 left-4 md:left-8 flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-200 group"
         >
-          <path
-            d="M15 18L9 12L15 6"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-        <span className="text-sm md:text-base font-medium">Back to Home</span>
-      </button>
-      <main className="pt-8 pb-5 px-4 md:px-8 max-w-4xl mx-auto">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="group-hover:transform group-hover:-translate-x-1 transition-transform duration-200"
+          >
+            <path
+              d="M15 18L9 12L15 6"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span className="text-sm md:text-base font-medium">Back to Home</span>
+        </button>
         {/* Privacy Policy Header */}
         <div className="text-center mb-6">
           <h1 className="text-4xl md:text-5xl font-light text-gray-800 mb-8">
