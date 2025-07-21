@@ -19,6 +19,7 @@ import { FormPopupProvider } from "./hooks/useFormPopup";
 import FormPopup from "./components/ui/FormPopup";
 import Kitcarousel from "./components/sections/Kitcarousel";
 import WhatsappCTA from "./components/sections/WhatsappCTA";
+import TermsAndCondition from "./components/sections/TermsAndCondition";
 
 // Main Landing Page Component
 const MainLandingPage: React.FC = () => {
@@ -68,6 +69,11 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<MainLandingPage />} />
+          <Route
+            path="/terms-and-conditions"
+            element={<TermsAndCondition />}
+          />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
