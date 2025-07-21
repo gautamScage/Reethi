@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormPopup } from "../../hooks/useFormPopup";
 import { cn } from "../../lib/utils";
+import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
   const { openPopup } = useFormPopup();
@@ -103,13 +104,13 @@ const Footer: React.FC = () => {
           >
             <span
               onClick={openPopup}
-              className="text-white text-xs md:text-xl cursor-pointer"
+              className="text-white text-xs md:text-md cursor-pointer"
             >
               ENQUIRE NOW
             </span>
             <span className="text-xl text-white">|</span>
             <span
-              className="text-white text-xs md:text-xl cursor-pointer"
+              className="text-white text-xs md:text-md cursor-pointer"
               onClick={() =>
                 window.open(
                   "https://wa.me/919958100762?text=Hi%20Reethi%20Gifts%20team!%20I%27m%20interested%20in%20your%20corporate%20gifting%20solutions.%20Please%20share%20your%20catalog%20or%20help%20me%20with%20a%20custom%20gifting%20plan%20for%20my%20company.%20Thanks!",
@@ -119,6 +120,13 @@ const Footer: React.FC = () => {
             >
               DOWNLOAD CATALOGUE
             </span>
+            <span className="text-xl text-white">|</span>
+              <Link
+                to="/terms-and-conditions"
+                className="text-white text-xs md:text-md cursor-pointer"
+              >
+                TERMS & CONDITIONS
+              </Link>{" "}
           </div>
         </div>
 
