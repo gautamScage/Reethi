@@ -1,33 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import emailjs from "@emailjs/browser";
+import {
+  corporateGiftFormSchema,
+  type CorporateGiftFormSchema,
+} from "../../schema/formSchemas";
 
 const FormSection: React.FC = () => {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    phoneNumber: "",
-    email: "",
-    city: "",
-    giftingFor: "",
-    budgetPerGift: "",
-    quantityRequired: "",
-    additionalInfo: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<CorporateGiftFormSchema>({
+    resolver: zodResolver(corporateGiftFormSchema),
   });
 
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const inputBaseClasses = `px-5 py-3 rounded-lg text-xs transition-all duration-300 ease-in-out outline-none box-border text-neutral-800 placeholder-neutral-400 placeholder:font-light border border-neutral-300 focus:border-[#A4B465] focus:bg-white`;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const onSubmit = (formData: CorporateGiftFormSchema) => {
     const templateParams = {
       user_name: formData.fullName,
       user_phone: formData.phoneNumber,
@@ -46,44 +38,21 @@ const FormSection: React.FC = () => {
         templateParams,
         "M6cPedCWOdOXAM6Fl"
       )
-      .then(
-        (result) => {
-          console.log("SUCCESS!", result.text);
-          alert("Form submitted successfully!");
-          setFormData({
-            fullName: "",
-            phoneNumber: "",
-            email: "",
-            city: "",
-            giftingFor: "",
-            budgetPerGift: "",
-            quantityRequired: "",
-            additionalInfo: "",
-          });
-        },
-        (error) => {
-          console.log("FAILED...", error.text);
-          alert("Form submission failed. Please try again.");
-        }
-      );
+      .then(() => {
+        alert("Form submitted successfully!");
+        reset();
+      })
+      .catch(() => {
+        alert("Form submission failed. Please try again.");
+      });
   };
-
-  const inputBaseClasses = ` px-5 py-3  rounded-lg text-xs 
-  transition-all duration-300 ease-in-out outline-none box-border
-   text-neutral-800 placeholder-neutral-400 placeholder:font-light border border-neutral-300 
-   focus:border-[#A4B465] focus:bg-white`;
 
   return (
     <section className="relative w-full flex items-center justify-center py-16 md:py-24 bg-cover bg-no-repeat bg-center">
-      {/* Background Image */}
       <div className="absolute inset-0 bg-[url(/images/form_image.svg)] bg-no-repeat bg-center bg-cover" />
-
-      {/* Background Gradient Overlay */}
       <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#587A33] to-[#A4B465] opacity-50 -z-50" />
 
-      {/* Form Container */}
       <div className="relative bg-white/95 backdrop-blur-sm rounded-3xl py-5 md:py-10 px-7 md:px-20 max-w-[22rem] md:max-w-5xl">
-        {/* Header Section */}
         <div className="text-center pb-6 md:pb-8">
           <h2
             className="text-xl md:text-[2.5rem] text-gray-800 mb-2 tracking-wide uppercase"
@@ -100,108 +69,128 @@ const FormSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3 md:gap-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-3 md:gap-4"
+        >
           {/* Full Name */}
-          <input
-            type="text"
-            name="fullName"
-            placeholder="Enter your Full Name*"
-            value={formData.fullName}
-            onChange={handleInputChange}
-            required
-            className={`${inputBaseClasses} w-full `}
-          />
-
-          {/* Phone and Email */}
-          <div className="grid grid-cols-2 gap-2 md:gap-5">
+          <div className="flex flex-col">
             <input
-              type="tel"
-              name="phoneNumber"
-              placeholder="Enter your Phone Number*"
-              value={formData.phoneNumber}
-              onChange={handleInputChange}
-              required
-              className={inputBaseClasses}
+              {...register("fullName")}
+              placeholder="Enter your Full Name*"
+              className={`${inputBaseClasses} w-full`}
             />
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your Business Email Address*"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-              className={inputBaseClasses}
-            />
+            {errors.fullName && (
+              <p className="text-red-500 text-xs mt-1 pl-1">
+                {errors.fullName.message}
+              </p>
+            )}
           </div>
 
-          {/* City and Gifting For */}
+          {/* Phone & Email */}
           <div className="grid grid-cols-2 gap-2 md:gap-5">
-            <input
-              type="text"
-              name="city"
-              placeholder="Enter your City*"
-              value={formData.city}
-              onChange={handleInputChange}
-              required
-              className={inputBaseClasses}
-            />
-            <select
-              name="giftingFor"
-              value={formData.giftingFor}
-              onChange={handleInputChange}
-              required
-              className={`${inputBaseClasses} cursor-pointer`}
-            >
-              <option value="" disabled className="text-gray-400">
-                Gifting For
-              </option>
-              <option value="employees">Employees</option>
-              <option value="clients">Clients</option>
-              <option value="partners">Business Partners</option>
-              <option value="events">Corporate Events</option>
-              <option value="festivals">Festivals</option>
-              <option value="other">Other</option>
-            </select>
+            <div className="flex flex-col">
+              <input
+                {...register("phoneNumber")}
+                placeholder="Enter your Phone Number*"
+                className={inputBaseClasses}
+              />
+              {errors.phoneNumber && (
+                <p className="text-red-500 text-xs mt-1 pl-1">
+                  {errors.phoneNumber.message}
+                </p>
+              )}
+            </div>
+            <div className="flex flex-col">
+              <input
+                {...register("email")}
+                placeholder="Enter your Business Email Address*"
+                className={inputBaseClasses}
+              />
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1 pl-1">
+                  {errors.email.message}
+                </p>
+              )}
+            </div>
           </div>
 
-          {/* Budget and Quantity */}
+          {/* City & Gifting For */}
           <div className="grid grid-cols-2 gap-2 md:gap-5">
-            <input
-              type="text"
-              name="budgetPerGift"
-              placeholder="Budget Per Gift*"
-              value={formData.budgetPerGift}
-              onChange={handleInputChange}
-              required
-              className={inputBaseClasses}
-            />
-            <input
-              type="number"
-              name="quantityRequired"
-              placeholder="Quantity Required*"
-              value={formData.quantityRequired}
-              onChange={handleInputChange}
-              required
-              min="1"
-              className={inputBaseClasses}
-            />
+            <div className="flex flex-col">
+              <input
+                {...register("city")}
+                placeholder="Enter your City*"
+                className={inputBaseClasses}
+              />
+              {errors.city && (
+                <p className="text-red-500 text-xs mt-1 pl-1">
+                  {errors.city.message}
+                </p>
+              )}
+            </div>
+            <div className="flex flex-col">
+              <select
+                {...register("giftingFor")}
+                className={`${inputBaseClasses} cursor-pointer`}
+              >
+                <option value="">Gifting For</option>
+                <option value="employees">Employees</option>
+                <option value="clients">Clients</option>
+                <option value="partners">Business Partners</option>
+                <option value="events">Corporate Events</option>
+                <option value="festivals">Festivals</option>
+                <option value="other">Other</option>
+              </select>
+              {errors.giftingFor && (
+                <p className="text-red-500 text-xs mt-1 pl-1">
+                  {errors.giftingFor.message}
+                </p>
+              )}
+            </div>
           </div>
 
-          {/* Additional Information */}
+          {/* Budget & Quantity */}
+          <div className="grid grid-cols-2 gap-2 md:gap-5">
+            <div className="flex flex-col">
+              <input
+                {...register("budgetPerGift")}
+                placeholder="Budget Per Gift*"
+                className={inputBaseClasses}
+              />
+              {errors.budgetPerGift && (
+                <p className="text-red-500 text-xs mt-1 pl-1">
+                  {errors.budgetPerGift.message}
+                </p>
+              )}
+            </div>
+            <div className="flex flex-col">
+              <input
+                {...register("quantityRequired")}
+                type="number"
+                placeholder="Quantity Required*"
+                className={inputBaseClasses}
+              />
+              {errors.quantityRequired && (
+                <p className="text-red-500 text-xs mt-1 pl-1">
+                  {errors.quantityRequired.message}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Additional Info */}
           <textarea
-            name="additionalInfo"
+            {...register("additionalInfo")}
             placeholder="Additional Information"
-            value={formData.additionalInfo}
-            onChange={handleInputChange}
             rows={5}
-            className={`${inputBaseClasses}]`}
+            className={`${inputBaseClasses} resize-y`}
           />
 
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-fit mx-auto bg-[#A4B465] hover:bg-[#ebe8cb] text-white py-3 px-6 rounded-lg text-sm transition-all duration-150 ease-in-out "
+            className="w-fit mx-auto bg-[#A4B465] hover:bg-[#ebe8cb] text-white py-3 px-6 rounded-lg text-sm transition-all duration-150 ease-in-out"
             onMouseEnter={(e) => {
               e.currentTarget.style.color = "#000";
             }}
