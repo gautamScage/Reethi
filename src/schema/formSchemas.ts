@@ -14,7 +14,7 @@ export const corporateGiftFormSchema = z.object({
   budgetPerGift: z.string().min(1, "Budget is required"),
   quantityRequired: z
     .string()
-    .refine((val) => Number(val) > 0, "Quantity must be at least 1"),
+    .refine((val) => Number(val) > 49, "Quantity must be at least 50"),
   additionalInfo: z.string().optional(),
 });
 

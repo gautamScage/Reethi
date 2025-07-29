@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import emailjs from "@emailjs/browser";
+import ReactGA from 'react-ga4';
 import { useFormPopup } from "../../hooks/useFormPopup";
 import {
   corporateGiftFormSchema,
@@ -21,6 +22,14 @@ const FormPopup: React.FC = () => {
   });
 
   const onSubmit = (formData: CorporateGiftFormSchema) => {
+    // Track form submission attempt
+    ReactGA.event({
+      category: 'Form',
+      action: 'Submit_Attempt',
+      label: 'Corporate Gift Form Popup',
+      value: 1
+    });
+
     const templateParams = {
       user_name: formData.fullName,
       user_phone: formData.phoneNumber,
@@ -40,11 +49,35 @@ const FormPopup: React.FC = () => {
         "M6cPedCWOdOXAM6Fl"
       )
       .then(() => {
+        // Track successful form submission
+        ReactGA.event({
+          category: 'Form',
+          action: 'Submit_Success',
+          label: 'Corporate Gift Form Popup',
+          value: 1
+        });
+
+        // Track form completion with additional details
+        ReactGA.event({
+          category: 'Lead',
+          action: 'Generated',
+          label: `Corporate Gift - ${formData.giftingFor} - ${formData.city}`,
+          value: parseInt(formData.budgetPerGift) || 0
+        });
+
         alert("Form submitted successfully!");
         reset();
         closePopup();
       })
       .catch(() => {
+        // Track form submission failure
+        ReactGA.event({
+          category: 'Form',
+          action: 'Submit_Failed',
+          label: 'Corporate Gift Form Popup',
+          value: 1
+        });
+
         alert("Form submission failed. Please try again.");
       });
   };
