@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import emailjs from "@emailjs/browser";
+import ReactGA from 'react-ga4';
 import {
   corporateGiftFormSchema,
   type CorporateGiftFormSchema,
@@ -20,6 +21,14 @@ const FormSection: React.FC = () => {
   const inputBaseClasses = `px-5 py-3 rounded-lg text-xs transition-all duration-300 ease-in-out outline-none box-border text-neutral-800 placeholder-neutral-400 placeholder:font-light border border-neutral-300 focus:border-[#A4B465] focus:bg-white`;
 
   const onSubmit = (formData: CorporateGiftFormSchema) => {
+    // Track form submission attempt
+    ReactGA.event({
+      category: 'Form',
+      action: 'Submit_Attempt',
+      label: 'Main Contact Form',
+      value: 1
+    });
+
     const templateParams = {
       user_name: formData.fullName,
       user_phone: formData.phoneNumber,
@@ -39,10 +48,34 @@ const FormSection: React.FC = () => {
         "M6cPedCWOdOXAM6Fl"
       )
       .then(() => {
+        // Track successful form submission
+        ReactGA.event({
+          category: 'Form',
+          action: 'Submit_Success',
+          label: 'Main Contact Form',
+          value: 1
+        });
+
+        // Track lead generation with additional details
+        ReactGA.event({
+          category: 'Lead',
+          action: 'Generated',
+          label: `Main Form - ${formData.giftingFor} - ${formData.city}`,
+          value: parseInt(formData.budgetPerGift) || 0
+        });
+
         alert("Form submitted successfully!");
         reset();
       })
       .catch(() => {
+        // Track form submission failure
+        ReactGA.event({
+          category: 'Form',
+          action: 'Submit_Failed',
+          label: 'Main Contact Form',
+          value: 1
+        });
+
         alert("Form submission failed. Please try again.");
       });
   };
