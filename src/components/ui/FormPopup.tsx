@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import emailjs from "@emailjs/browser";
-import ReactGA from 'react-ga4';
+import ReactGA from "react-ga4";
 import { useFormPopup } from "../../hooks/useFormPopup";
 import {
   corporateGiftFormSchema,
@@ -11,6 +11,7 @@ import {
 
 const FormPopup: React.FC = () => {
   const { isOpen, closePopup } = useFormPopup();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -21,13 +22,15 @@ const FormPopup: React.FC = () => {
     resolver: zodResolver(corporateGiftFormSchema),
   });
 
-  const onSubmit = (formData: CorporateGiftFormSchema) => {
+  const onSubmit = async (formData: CorporateGiftFormSchema) => {
+    setIsSubmitting(true);
+
     // Track form submission attempt
     ReactGA.event({
-      category: 'Form',
-      action: 'Submit_Attempt',
-      label: 'Corporate Gift Form Popup',
-      value: 1
+      category: "Form",
+      action: "Submit_Attempt",
+      label: "Corporate Gift Form Popup",
+      value: 1,
     });
 
     const templateParams = {
@@ -41,45 +44,46 @@ const FormPopup: React.FC = () => {
       additional_info: formData.additionalInfo,
     };
 
-    emailjs
-      .send(
+    try {
+      await emailjs.send(
         "service_t5zz5ai",
         "template_j3qmp5p",
         templateParams,
         "M6cPedCWOdOXAM6Fl"
-      )
-      .then(() => {
-        // Track successful form submission
-        ReactGA.event({
-          category: 'Form',
-          action: 'Submit_Success',
-          label: 'Corporate Gift Form Popup',
-          value: 1
-        });
+      );
 
-        // Track form completion with additional details
-        ReactGA.event({
-          category: 'Lead',
-          action: 'Generated',
-          label: `Corporate Gift - ${formData.giftingFor} - ${formData.city}`,
-          value: parseInt(formData.budgetPerGift) || 0
-        });
-
-        alert("Form submitted successfully!");
-        reset();
-        closePopup();
-      })
-      .catch(() => {
-        // Track form submission failure
-        ReactGA.event({
-          category: 'Form',
-          action: 'Submit_Failed',
-          label: 'Corporate Gift Form Popup',
-          value: 1
-        });
-
-        alert("Form submission failed. Please try again.");
+      // Track successful form submission
+      ReactGA.event({
+        category: "Form",
+        action: "Submit_Success",
+        label: "Corporate Gift Form Popup",
+        value: 1,
       });
+
+      // Track form completion with additional details
+      ReactGA.event({
+        category: "Lead",
+        action: "Generated",
+        label: `Corporate Gift - ${formData.giftingFor} - ${formData.city}`,
+        value: parseInt(formData.budgetPerGift) || 0,
+      });
+
+      alert("Form submitted successfully!");
+      reset();
+      closePopup();
+    } catch (error) {
+      // Track form submission failure
+      ReactGA.event({
+        category: "Form",
+        action: "Submit_Failed",
+        label: "Corporate Gift Form Popup",
+        value: 1,
+      });
+
+      alert("Form submission failed. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const inputBaseClasses = `px-5 py-3 rounded-lg text-xs transition-all duration-300 ease-in-out outline-none box-border text-neutral-800 placeholder-neutral-400 placeholder:font-light border border-neutral-300 focus:border-[#A4B465] focus:bg-white`;
@@ -167,9 +171,12 @@ const FormPopup: React.FC = () => {
               {...register("fullName")}
               placeholder="Enter your Full Name*"
               className={`${inputBaseClasses}`}
+              disabled={isSubmitting}
             />
             {errors.fullName && (
-              <p className="text-red-500 text-xs pl-1">{errors.fullName.message}</p>
+              <p className="text-red-500 text-xs pl-1">
+                {errors.fullName.message}
+              </p>
             )}
           </div>
 
@@ -179,6 +186,7 @@ const FormPopup: React.FC = () => {
                 {...register("phoneNumber")}
                 placeholder="Phone Number*"
                 className={inputBaseClasses}
+                disabled={isSubmitting}
               />
               {errors.phoneNumber && (
                 <p className="text-red-500 text-xs mt-1 pl-1">
@@ -191,6 +199,7 @@ const FormPopup: React.FC = () => {
                 {...register("email")}
                 placeholder="Business Email Address*"
                 className={inputBaseClasses}
+                disabled={isSubmitting}
               />
               {errors.email && (
                 <p className="text-red-500 text-xs mt-1 pl-1">
@@ -206,6 +215,7 @@ const FormPopup: React.FC = () => {
                 {...register("city")}
                 placeholder="City*"
                 className={inputBaseClasses}
+                disabled={isSubmitting}
               />
               {errors.city && (
                 <p className="text-red-500 text-xs mt-1 pl-1">
@@ -217,6 +227,7 @@ const FormPopup: React.FC = () => {
               <select
                 {...register("giftingFor")}
                 className={`${inputBaseClasses} cursor-pointer`}
+                disabled={isSubmitting}
               >
                 <option value="">Gifting For</option>
                 <option value="employees">Employees</option>
@@ -240,6 +251,7 @@ const FormPopup: React.FC = () => {
                 {...register("budgetPerGift")}
                 placeholder="Budget Per Gift*"
                 className={inputBaseClasses}
+                disabled={isSubmitting}
               />
               {errors.budgetPerGift && (
                 <p className="text-red-500 text-xs mt-1 pl-1">
@@ -253,6 +265,7 @@ const FormPopup: React.FC = () => {
                 type="number"
                 placeholder="Quantity Required*"
                 className={inputBaseClasses}
+                disabled={isSubmitting}
               />
               {errors.quantityRequired && (
                 <p className="text-red-500 text-xs mt-1 pl-1">
@@ -267,13 +280,31 @@ const FormPopup: React.FC = () => {
             placeholder="Additional Information"
             rows={3}
             className={`${inputBaseClasses} resize-y min-h-[80px]`}
+            disabled={isSubmitting}
           />
 
           <button
             type="submit"
-            className="w-fit mx-auto bg-[#A4B465] hover:bg-[#ebe8cb] text-white py-3 px-6 rounded-lg text-sm transition-all"
+            disabled={isSubmitting}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "#000";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = "#fff";
+            }}
+            className={`w-fit mx-auto flex items-center gap-2 py-3 px-6 rounded-lg text-sm transition-all ${
+              isSubmitting
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-[#A4B465] hover:bg-[#ebe8cb] text-white"
+            }`}
           >
-            ENQUIRE NOW
+            {isSubmitting && (
+              <div
+                className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                style={{ animation: "spin 1s linear infinite" }}
+              />
+            )}
+            {isSubmitting ? "SUBMITTING..." : "ENQUIRE NOW"}
           </button>
         </form>
       </div>

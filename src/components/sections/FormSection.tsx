@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import emailjs from "@emailjs/browser";
@@ -17,16 +17,19 @@ const FormSection: React.FC = () => {
   } = useForm<CorporateGiftFormSchema>({
     resolver: zodResolver(corporateGiftFormSchema),
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const inputBaseClasses = `px-5 py-3 rounded-lg text-xs transition-all duration-300 ease-in-out outline-none box-border text-neutral-800 placeholder-neutral-400 placeholder:font-light border border-neutral-300 focus:border-[#A4B465] focus:bg-white`;
 
-  const onSubmit = (formData: CorporateGiftFormSchema) => {
+  const onSubmit = async (formData: CorporateGiftFormSchema) => {
+    setIsSubmitting(true);
+
     // Track form submission attempt
     ReactGA.event({
-      category: 'Form',
-      action: 'Submit_Attempt',
-      label: 'Main Contact Form',
-      value: 1
+      category: "Form",
+      action: "Submit_Attempt",
+      label: "Corporate Gift Form Popup",
+      value: 1,
     });
 
     const templateParams = {
@@ -40,44 +43,45 @@ const FormSection: React.FC = () => {
       additional_info: formData.additionalInfo,
     };
 
-    emailjs
-      .send(
+    try {
+      await emailjs.send(
         "service_t5zz5ai",
         "template_j3qmp5p",
         templateParams,
         "M6cPedCWOdOXAM6Fl"
-      )
-      .then(() => {
-        // Track successful form submission
-        ReactGA.event({
-          category: 'Form',
-          action: 'Submit_Success',
-          label: 'Main Contact Form',
-          value: 1
-        });
+      );
 
-        // Track lead generation with additional details
-        ReactGA.event({
-          category: 'Lead',
-          action: 'Generated',
-          label: `Main Form - ${formData.giftingFor} - ${formData.city}`,
-          value: parseInt(formData.budgetPerGift) || 0
-        });
-
-        alert("Form submitted successfully!");
-        reset();
-      })
-      .catch(() => {
-        // Track form submission failure
-        ReactGA.event({
-          category: 'Form',
-          action: 'Submit_Failed',
-          label: 'Main Contact Form',
-          value: 1
-        });
-
-        alert("Form submission failed. Please try again.");
+      // Track successful form submission
+      ReactGA.event({
+        category: "Form",
+        action: "Submit_Success",
+        label: "Corporate Gift Form Popup",
+        value: 1,
       });
+
+      // Track form completion with additional details
+      ReactGA.event({
+        category: "Lead",
+        action: "Generated",
+        label: `Corporate Gift - ${formData.giftingFor} - ${formData.city}`,
+        value: parseInt(formData.budgetPerGift) || 0,
+      });
+
+      alert("Form submitted successfully!");
+      reset();
+    } catch (error) {
+      // Track form submission failure
+      ReactGA.event({
+        category: "Form",
+        action: "Submit_Failed",
+        label: "Corporate Gift Form Popup",
+        value: 1,
+      });
+
+      alert("Form submission failed. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -222,16 +226,27 @@ const FormSection: React.FC = () => {
 
           {/* Submit Button */}
           <button
-            type="submit"
-            className="w-fit mx-auto bg-[#A4B465] hover:bg-[#ebe8cb] text-white py-3 px-6 rounded-lg text-sm transition-all duration-150 ease-in-out"
+           type="submit"
+            disabled={isSubmitting}
             onMouseEnter={(e) => {
               e.currentTarget.style.color = "#000";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.color = "#fff";
             }}
+            className={`w-fit mx-auto flex items-center gap-2 py-3 px-6 rounded-lg text-sm transition-all ${
+              isSubmitting
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-[#A4B465] hover:bg-[#ebe8cb] text-white"
+            }`}
           >
-            ENQUIRE NOW
+            {isSubmitting && (
+              <div
+                className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                style={{ animation: "spin 1s linear infinite" }}
+              />
+            )}
+            {isSubmitting ? "SUBMITTING..." : "ENQUIRE NOW"}
           </button>
         </form>
       </div>
