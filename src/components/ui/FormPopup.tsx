@@ -8,8 +8,10 @@ import {
   corporateGiftFormSchema,
   type CorporateGiftFormSchema,
 } from "../../schema/formSchemas";
+import { useNavigate } from "react-router-dom";
 
 const FormPopup: React.FC = () => {
+  const navigate = useNavigate();
   const { isOpen, closePopup } = useFormPopup();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -68,9 +70,9 @@ const FormPopup: React.FC = () => {
         value: parseInt(formData.budgetPerGift) || 0,
       });
 
-      alert("Form submitted successfully!");
       reset();
       closePopup();
+      navigate("/thank-you");
     } catch (error) {
       // Track form submission failure
       ReactGA.event({

@@ -122,7 +122,7 @@ const Footer: React.FC = () => {
             </span>
             <span className="text-xl text-white">|</span>
               <Link
-                to="/terms-and-conditions"
+                to="/privact-policy"
                 className="text-white text-xs md:text-md cursor-pointer"
               >
                 PRIVACY POLICY
