@@ -8,7 +8,13 @@ export const corporateGiftFormSchema = z.object({
     .min(10, "Phone number must be 10 digits")
     .max(10, "Phone number must be 10 digits")
     .regex(/^\d+$/, "Phone number must be numeric"),
-  email: z.string().email("Invalid email address"),
+  email: z
+    .string()
+    .email("Invalid email address")
+    .refine(
+      (email) => email.endsWith("@gmail.com") || email.endsWith("@yahoo.com"),
+      "Email must be from gmail.com or yahoo.com"
+    ),
   city: z.string().min(1, "City is required"),
   giftingFor: z.string().min(1, "Please select who you're gifting for"),
   budgetPerGift: z.string().min(1, "Budget is required"),
