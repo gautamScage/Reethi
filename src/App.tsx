@@ -6,7 +6,7 @@ import {
   Navigate,
   useLocation,
 } from "react-router-dom";
-import ReactGA from 'react-ga4';
+import ReactGA from "react-ga4";
 import { Navigation } from "./components/layout/Navigation";
 import { HeroSection } from "./components/sections/HeroSection";
 import ClientSection from "./components/sections/ClientSection";
@@ -22,19 +22,20 @@ import FormPopup from "./components/ui/FormPopup";
 import Kitcarousel from "./components/sections/Kitcarousel";
 import WhatsappCTA from "./components/sections/WhatsappCTA";
 import TermsAndCondition from "./components/sections/TermsAndCondition";
+import SuccessRedirection from "./components/sections/SuccessRedirection";
 
 // Your GA4 Measurement ID
-const MEASUREMENT_ID = 'G-WZQWT0K3JV';
+const MEASUREMENT_ID = "G-WZQWT0K3JV";
 
 // Component to track page views
 function Analytics() {
   const location = useLocation();
-  
+
   useEffect(() => {
     // Track page view on route change
-    ReactGA.send({ 
-      hitType: "pageview", 
-      page: location.pathname + location.search 
+    ReactGA.send({
+      hitType: "pageview",
+      page: location.pathname + location.search,
     });
   }, [location]);
 
@@ -84,7 +85,6 @@ const MainLandingPage: React.FC = () => {
 
 // App Component with Routing
 function App() {
-
   useEffect(() => {
     ReactGA.initialize(MEASUREMENT_ID);
   }, []);
@@ -95,10 +95,8 @@ function App() {
         <Analytics />
         <Routes>
           <Route path="/" element={<MainLandingPage />} />
-          <Route
-            path="/terms-and-conditions"
-            element={<TermsAndCondition />}
-          />
+          <Route path="/privact-policy" element={<TermsAndCondition />} />
+          <Route path="/thank-you" element={<SuccessRedirection />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

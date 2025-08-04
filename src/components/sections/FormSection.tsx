@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import emailjs from "@emailjs/browser";
-import ReactGA from 'react-ga4';
+import ReactGA from "react-ga4";
 import {
   corporateGiftFormSchema,
   type CorporateGiftFormSchema,
 } from "../../schema/formSchemas";
+import { useNavigate } from "react-router-dom";
 
 const FormSection: React.FC = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -67,8 +69,8 @@ const FormSection: React.FC = () => {
         value: parseInt(formData.budgetPerGift) || 0,
       });
 
-      alert("Form submitted successfully!");
       reset();
+      navigate("/thank-you");
     } catch (error) {
       // Track form submission failure
       ReactGA.event({
@@ -226,7 +228,7 @@ const FormSection: React.FC = () => {
 
           {/* Submit Button */}
           <button
-           type="submit"
+            type="submit"
             disabled={isSubmitting}
             onMouseEnter={(e) => {
               e.currentTarget.style.color = "#000";
