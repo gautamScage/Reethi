@@ -12,15 +12,20 @@ export const corporateGiftFormSchema = z.object({
     .string()
     .email("Invalid email address")
     .refine(
-      (email) => email.endsWith("@gmail.com") || email.endsWith("@yahoo.com"),
-      "Email must be from gmail.com or yahoo.com"
+      (email) => !email.includes("gmail") && !email.includes("yahoo"),
+      "Email cannot be from gmail or yahoo"
     ),
   city: z.string().min(1, "City is required"),
   giftingFor: z.string().min(1, "Please select who you're gifting for"),
-  budgetPerGift: z.string().min(1, "Budget is required"),
+  budgetPerGift: z
+    .string()
+    .refine(
+      (val) => Number(val) >= 200,
+      "Budget per gift must be at least ₹200"
+    ),
   quantityRequired: z
     .string()
-    .refine((val) => Number(val) > 49, "Quantity must be at least 50"),
+    .refine((val) => Number(val) >= 50, "Quantity must be at least 50"),
   additionalInfo: z.string().optional(),
 });
 
