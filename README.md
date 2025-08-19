@@ -122,4 +122,4 @@ This project is private and proprietary.
 
 ---
 
-Built with ❤️ using React, Vite, and TypeScript 
+Built with ❤️ using React, Vite, and TypeScript  
