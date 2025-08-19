@@ -1,5 +1,1 @@
-<svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-  <rect width="200" height="100" fill="#f8f9fa" stroke="#e9ecef" stroke-width="1"/>
-  <polygon points="80,30 120,30 110,50 90,50" fill="#ff6b35"/>
-  <text x="100" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ff6b35">Offiga</text>
-</svg> 
+<svg height="100" viewBox="0 0 200 100" width="200" xmlns="http://www.w3.org/2000/svg"><path d="m0 0h200v100h-200z" fill="#f8f9fa" stroke="#e9ecef"/><g fill="#ff6b35"><path d="m80 30h40l-10 20h-20z"/><text font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" x="100" y="70">Offiga</text></g></svg>
