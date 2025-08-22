@@ -11,10 +11,10 @@ export const corporateGiftFormSchema = z.object({
   email: z
     .string()
     .email("Invalid email address")
-    .refine(
-      (email) => !email.includes("gmail") && !email.includes("yahoo"),
-      "Email cannot be from gmail or yahoo"
-    ),
+    .refine((email) => {
+      const domain = email.toLowerCase();
+      return !domain.includes("gmail") && !domain.includes("yahoo");
+    }, "Email cannot be from gmail or yahoo"),
   city: z.string().min(1, "City is required"),
   giftingFor: z.string().min(1, "Please select who you're gifting for"),
   budgetPerGift: z
