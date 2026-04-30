@@ -22,9 +22,10 @@ export const Navigation: React.FC = () => {
 
           {/* Phone Number - Desktop version */}
           <a
-            href="tel:+919958100762"
+            href="https://wa.me/9958100762?text=Hi%20Reethi%20Gifts%20team!%20I%27m%20interested%20in%20your%20corporate%20gifting%20solutions.%20Please%20share%20your%20catalog%20or%20help%20me%20with%20a%20custom%20gifting%20plan%20for%20my%20company.%20Thanks!"
+            target="_blank"
             className="flex items-center gap-2 text-white no-underline transition-all duration-300 ease-in-out hover:opacity-80 hover:-translate-y-0.5 cursor-pointer group"
-            title="Call us at +91 9958100762"
+            title="Chat with us on WhatsApp"
           >
             <img
               src="/images/Phone logo.svg"

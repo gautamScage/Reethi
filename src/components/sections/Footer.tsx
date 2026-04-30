@@ -25,6 +25,18 @@ const Footer: React.FC = () => {
           {/* Social Media Icons */}
           <div className="flex gap-4 md:gap-8">
             <div
+            className="w-8 md:w-12 h-8 md:h-12  bg-[#A4B465] rounded-full flex justify-center items-center cursor-pointer"
+            onClick={()=>window.open("https://www.linkedin.com/in/reethi-gifts-08a406405/")}>
+              <img src="/images/linkedin-icon.svg"
+              alt="LinkedIn"
+              style={{
+                  width: "46px",
+                  height: "46px",
+                }}
+              />
+
+            </div>
+            <div
               className="w-8 md:w-12 h-8 md:h-12 bg-[#A4B465] rounded-full flex justify-center items-center cursor-pointer"
               onClick={() => window.open("mailto:info@reethigifts.com")}
             >
