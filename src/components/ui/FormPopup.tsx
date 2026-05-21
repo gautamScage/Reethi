@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import emailjs from "@emailjs/browser";
 import ReactGA from "react-ga4";
 import { useFormPopup } from "../../hooks/useFormPopup";
 import {
@@ -35,24 +34,34 @@ const FormPopup: React.FC = () => {
       value: 1,
     });
 
-    const templateParams = {
-      user_name: formData.fullName,
-      user_phone: formData.phoneNumber,
-      user_email: formData.email,
-      user_city: formData.city,
-      gifting_for: formData.giftingFor,
-      budget_per_gift: formData.budgetPerGift,
-      quantity_required: formData.quantityRequired,
-      additional_info: formData.additionalInfo,
+    const formDataToSend = {
+      access_key: "6f52223e-d02e-474c-ad78-2f1d2bc13c25",
+      subject: "New Reethi Corporate Gift Enquiry",
+
+      fullName: formData.fullName,
+      phoneNumber: formData.phoneNumber,
+      email: formData.email,
+      city: formData.city,
+      giftingFor: formData.giftingFor,
+      budgetPerGift: formData.budgetPerGift,
+      quantityRequired: formData.quantityRequired,
+      additionalInfo: formData.additionalInfo,
     };
 
     try {
-      await emailjs.send(
-        "service_t5zz5ai",
-        "template_j3qmp5p",
-        templateParams,
-        "M6cPedCWOdOXAM6Fl"
-      );
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formDataToSend),
+      });
+
+      const result = await response.json();
+
+      if (!result.success) {
+        throw new Error("Web3Forms submission failed");
+      }
 
       // Track successful form submission
       ReactGA.event({

@@ -1,5 +1,5 @@
-import { useState, createContext, useContext, useEffect } from 'react';
-import type { ReactNode } from 'react';
+import { useState, createContext, useContext, useEffect } from "react";
+import type { ReactNode } from "react";
 
 interface FormPopupContextType {
   isOpen: boolean;
@@ -8,7 +8,7 @@ interface FormPopupContextType {
 }
 
 const FormPopupContext = createContext<FormPopupContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const FormPopupProvider = ({ children }: { children: ReactNode }) => {
@@ -22,7 +22,7 @@ export const FormPopupProvider = ({ children }: { children: ReactNode }) => {
     // Add a small delay to ensure the page has loaded properly
     const timer = setTimeout(() => {
       openPopup();
-    }, 1000); // Opens popup 1 second after the app loads
+    }, 10000); // Opens popup 1 second after the app loads
 
     return () => clearTimeout(timer);
   }, []); // Empty dependency array means this runs once when component mounts
@@ -37,7 +37,7 @@ export const FormPopupProvider = ({ children }: { children: ReactNode }) => {
 export const useFormPopup = () => {
   const context = useContext(FormPopupContext);
   if (context === undefined) {
-    throw new Error('useFormPopup must be used within a FormPopupProvider');
+    throw new Error("useFormPopup must be used within a FormPopupProvider");
   }
   return context;
 };
