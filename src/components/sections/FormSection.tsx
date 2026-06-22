@@ -97,7 +97,7 @@ const FormSection: React.FC = () => {
 
   return (
     <section className="relative w-full flex items-center justify-center py-16 md:py-24 bg-cover bg-no-repeat bg-center">
-      <div className="absolute inset-0 bg-[url(/images/form_image.svg)] bg-no-repeat bg-center bg-cover" />
+      <div className="absolute inset-0 bg-[url(/images/form_image.webp)] bg-no-repeat bg-center bg-cover" />
       <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#587A33] to-[#A4B465] opacity-50 -z-50" />
 
       <div className="relative bg-white/95 backdrop-blur-sm rounded-3xl py-5 md:py-10 px-7 md:px-20 max-w-[22rem] md:max-w-5xl">

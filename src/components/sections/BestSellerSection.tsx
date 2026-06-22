@@ -2,12 +2,12 @@ import React from "react";
 import { cn } from "../../lib/utils";
 
 const imageSources = [
-  "/images/best2.png",
-  "/images/best6.png",
-  "/images/best1.jpg",
-  "/images/best3.png",
-  "/images/best5.png",
-  "/images/best4.png",
+  "/images/best2.webp",
+  "/images/best6.webp",
+  "/images/best1.webp",
+  "/images/best3.webp",
+  "/images/best5.webp",
+  "/images/best4.webp",
 ];
 
 const BestSellerSection: React.FC = () => {
@@ -33,7 +33,7 @@ const BestSellerSection: React.FC = () => {
               "overflow-hidden",
               "cursor-pointer",
               "transition-transform",
-              "hover:scale-105"
+              "hover:scale-105",
             )}
           >
             <img

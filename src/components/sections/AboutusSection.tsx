@@ -9,7 +9,7 @@ const AboutUsSection: React.FC = () => {
                 md:rotate-0 md:-top-10 md:left-22 md:w-48 md:h-56"
       >
         <img
-          src="/images/about_top_left.svg"
+          src="/images/about_top_left.webp"
           alt="Gift set with thank you card"
           className="w-full h-full object-contain"
         />
@@ -20,7 +20,7 @@ const AboutUsSection: React.FC = () => {
                 md:rotate-0 md:top-20 md:-right-12 md:w-56 md:h-80"
       >
         <img
-          src="/images/About_top_right.svg"
+          src="/images/About_top_right.webp"
           alt="Product packaging collection"
           className="w-full h-full object-contain"
         />
@@ -31,7 +31,7 @@ const AboutUsSection: React.FC = () => {
                 md:rotate-0 md:-bottom-12 md:-left-10 md:w-72 md:h-40"
       >
         <img
-          src="/images/about_left_bt.png"
+          src="/images/about_left_bt.webp"
           alt="Gift items collection"
           className="w-full h-full object-contain rounded-lg"
         />
@@ -43,7 +43,7 @@ const AboutUsSection: React.FC = () => {
         style={{ zIndex: 1 }}
       >
         <img
-          src="/images/About_bottom_right.svg"
+          src="/images/About_bottom_right.webp"
           alt="Premium gift box"
           className="w-full h-full object-contain rounded-lg"
         />

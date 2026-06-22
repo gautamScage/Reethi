@@ -8,10 +8,10 @@ const BspokeSection: React.FC = () => {
   const [itemsPerView, setItemsPerView] = useState(4);
 
   const products = [
-    { id: 1, image: "/images/bspok1.png", alt: "Bspoke 1" },
-    { id: 2, image: "/images/bspok2.png", alt: "Bspoke 2" },
-    { id: 3, image: "/images/bspok3.png", alt: "Bspoke 3" },
-    { id: 4, image: "/images/bsopk4.png", alt: "Bspoke 4" },
+    { id: 1, image: "/images/bspok1.webp", alt: "Bspoke 1" },
+    { id: 2, image: "/images/bspok2.webp", alt: "Bspoke 2" },
+    { id: 3, image: "/images/bspok3.webp", alt: "Bspoke 3" },
+    { id: 4, image: "/images/bsopk4.webp", alt: "Bspoke 4" },
   ];
 
   const nextSlide = () => {

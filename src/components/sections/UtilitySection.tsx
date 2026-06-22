@@ -8,10 +8,10 @@ const UtilitySection: React.FC = () => {
   const [itemsPerView, setItemsPerView] = useState(4);
 
   const products = [
-    { id: 1, image: "/images/U&D1.jpg", alt: "Utility & Decor 1" },
-    { id: 2, image: "/images/U&D2.jpg", alt: "Utility & Decor 2" },
-    { id: 3, image: "/images/decor3.png", alt: "Utility & Decor 3" },
-    { id: 4, image: "/images/U&D3.jpg", alt: "Utility & Decor 4" },
+    { id: 1, image: "/images/U&D1.webp", alt: "Utility & Decor 1" },
+    { id: 2, image: "/images/U&D2.webp", alt: "Utility & Decor 2" },
+    { id: 3, image: "/images/decor3.webp", alt: "Utility & Decor 3" },
+    { id: 4, image: "/images/U&D3.webp", alt: "Utility & Decor 4" },
   ];
 
   const nextSlide = () => {

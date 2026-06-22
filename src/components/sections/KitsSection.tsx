@@ -4,17 +4,17 @@ const KitsSection: React.FC = () => {
   const categories = [
     {
       title: "JOINING KITS & BAGS",
-      image: "/images/kit_1.svg",
+      image: "/images/kit_1.webp",
       targetSection: "kitcarousel",
     },
     {
       title: "BESPOKE GIFT HAMPERS",
-      image: "/images/kit_2.svg",
+      image: "/images/kit_2.webp",
       targetSection: "bespoke-section",
     },
     {
       title: "UTILITY & DECOR",
-      image: "/images/kit_3.svg",
+      image: "/images/kit_3.webp",
       targetSection: "utility-section",
     },
   ];

@@ -8,10 +8,10 @@ const Kitcarousel: React.FC = () => {
   const [itemsPerView, setItemsPerView] = useState(4);
 
   const products = [
-    { id: 1, image: "/images/JoiningKitNew4.png", alt: "Joining Kit 1" },
-    { id: 2, image: "/images/joiningKits1.png", alt: "Joining Kit 2" },
-    { id: 3, image: "/images/JoiningKitNew3.png", alt: "Joining Kit 3" },
-    { id: 4, image: "/images/JoiningKitNew5.png", alt: "Joining Kit 4" },
+    { id: 1, image: "/images/JoiningKitNew4.webp", alt: "Joining Kit 1" },
+    { id: 2, image: "/images/joiningKits1.webp", alt: "Joining Kit 2" },
+    { id: 3, image: "/images/JoiningKitNew3.webp", alt: "Joining Kit 3" },
+    { id: 4, image: "/images/JoiningKitNew5.webp", alt: "Joining Kit 4" },
   ];
 
   const nextSlide = () => {

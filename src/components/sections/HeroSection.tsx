@@ -112,7 +112,7 @@ export const HeroSection: React.FC = () => {
           <div className="text-center text-white max-w-4xl mx-auto px-6  flex flex-col items-center justify-center gap-4 md:gap-8">
             {/* Main Logo */}
             <img
-              src="/images/Logo.svg"
+              src="/images/Logo.webp"
               alt="Reethi Logo"
               className="mx-auto mb-0 w-32 h-32 md:w-44 md:h-44"
               style={{

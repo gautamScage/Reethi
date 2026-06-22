@@ -149,7 +149,7 @@ const Footer: React.FC = () => {
           )}
         >
           <img
-            src="/images/Logo.svg"
+            src="/images/Logo.webp"
             alt="Reethi Logo"
             style={{
               height: "101px",
