@@ -42,6 +42,7 @@ const KitsSection: React.FC = () => {
               <img
                 src={category.image}
                 alt={category.title}
+                loading="lazy"
                 className="transition duration-300 bg-cover ease-in-out hover:scale-105"
               />
             </div>

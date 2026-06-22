@@ -83,6 +83,7 @@ const BspokeSection: React.FC = () => {
                 <img
                   src={product.image}
                   alt={product.alt}
+                  loading="lazy"
                   className="h-full w-full object-cover hover:scale-105 transition-transform duration-300 ease-in-out min-w-64"
                 />
               </div>

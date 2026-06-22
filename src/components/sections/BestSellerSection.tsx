@@ -39,6 +39,7 @@ const BestSellerSection: React.FC = () => {
             <img
               src={src}
               alt={`Best Seller ${index + 1}`}
+              loading="lazy"
               className="w-full h-full object-cover scale-90 rounded-lg"
             />
           </div>

@@ -33,6 +33,7 @@ const ClientSection: React.FC = () => {
             <img
               src={client.logo}
               alt={client.name}
+              loading="lazy"
               className="
           w-full h-auto object-contain 
         "
@@ -54,6 +55,7 @@ const ClientSection: React.FC = () => {
             <img
               src={client.logo}
               alt={client.name}
+              loading="lazy"
               className="
           w-full h-auto max-w-12 md:max-w-20 max-h-16 object-contain 
         "

@@ -11,6 +11,7 @@ const AboutUsSection: React.FC = () => {
         <img
           src="/images/about_top_left.webp"
           alt="Gift set with thank you card"
+          loading="lazy"
           className="w-full h-full object-contain"
         />
       </div>
@@ -22,6 +23,7 @@ const AboutUsSection: React.FC = () => {
         <img
           src="/images/About_top_right.webp"
           alt="Product packaging collection"
+          loading="lazy"
           className="w-full h-full object-contain"
         />
       </div>
@@ -33,6 +35,7 @@ const AboutUsSection: React.FC = () => {
         <img
           src="/images/about_left_bt.webp"
           alt="Gift items collection"
+          loading="lazy"
           className="w-full h-full object-contain rounded-lg"
         />
       </div>
@@ -45,6 +48,7 @@ const AboutUsSection: React.FC = () => {
         <img
           src="/images/About_bottom_right.webp"
           alt="Premium gift box"
+          loading="lazy"
           className="w-full h-full object-contain rounded-lg"
         />
       </div>

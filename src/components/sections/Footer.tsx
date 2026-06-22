@@ -12,9 +12,10 @@ const Footer: React.FC = () => {
       <img
         src="/images/right_foot_pic.svg"
         alt="Right decoration"
+        loading="lazy"
         className={cn(
           "hidden md:block",
-          "absolute right-0 bottom-0 h-1/2 w-auto z-10"
+          "absolute right-0 bottom-0 h-1/2 w-auto z-10",
         )}
       />
 
@@ -25,16 +26,22 @@ const Footer: React.FC = () => {
           {/* Social Media Icons */}
           <div className="flex gap-4 md:gap-8">
             <div
-            className="w-8 md:w-12 h-8 md:h-12  bg-[#A4B465] rounded-full flex justify-center items-center cursor-pointer"
-            onClick={()=>window.open("https://www.linkedin.com/in/reethi-gifts-08a406405/")}>
-              <img src="/images/linkedin-icon.svg"
-              alt="LinkedIn"
-              style={{
+              className="w-8 md:w-12 h-8 md:h-12  bg-[#A4B465] rounded-full flex justify-center items-center cursor-pointer"
+              onClick={() =>
+                window.open(
+                  "https://www.linkedin.com/in/reethi-gifts-08a406405/",
+                )
+              }
+            >
+              <img
+                src="/images/linkedin-icon.svg"
+                alt="LinkedIn"
+                loading="lazy"
+                style={{
                   width: "46px",
                   height: "46px",
                 }}
               />
-
             </div>
             <div
               className="w-8 md:w-12 h-8 md:h-12 bg-[#A4B465] rounded-full flex justify-center items-center cursor-pointer"
@@ -43,6 +50,7 @@ const Footer: React.FC = () => {
               <img
                 src="/images/mail_footer.svg"
                 alt="Email"
+                loading="lazy"
                 style={{
                   width: "46px",
                   height: "46px",
@@ -56,13 +64,14 @@ const Footer: React.FC = () => {
               onClick={() =>
                 window.open(
                   "https://www.facebook.com/people/Reethi-Corporate-Gifts/61576983373272/?mibextid=wwXIfr&rdid=CimGfUNpJ4rQApCe&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F16hFpS5FDQ%2F%3Fmibextid%3DwwXIfr",
-                  "_blank"
+                  "_blank",
                 )
               }
             >
               <img
                 src="/images/facebook_footer.svg"
                 alt="Facebook"
+                loading="lazy"
                 style={{
                   width: "46px",
                   height: "46px",
@@ -76,13 +85,14 @@ const Footer: React.FC = () => {
               onClick={() =>
                 window.open(
                   "https://www.instagram.com/reethi.corpgifts?igsh=MTduNG1paWNsaHhoMA==",
-                  "_blank"
+                  "_blank",
                 )
               }
             >
               <img
                 src="/images/insta_footer.svg"
                 alt="Instagram"
+                loading="lazy"
                 style={{
                   width: "46px",
                   height: "46px",
@@ -92,12 +102,14 @@ const Footer: React.FC = () => {
 
             {/* WhatsApp Icon */}
             <div
+              title="Chat with us on WhatsApp"
               className="w-8 md:w-12 h-8 md:h-12 bg-[#A4B465] rounded-full flex justify-center items-center cursor-pointer"
               onClick={() => window.open("tel:+919958100762")}
             >
               <img
                 src="/images/Phone logo.svg"
                 alt="Phone"
+                loading="lazy"
                 style={{
                   width: "46px",
                   height: "46px",
@@ -126,31 +138,32 @@ const Footer: React.FC = () => {
               onClick={() =>
                 window.open(
                   "https://wa.me/919958100762?text=Hi%20Reethi%20Gifts%20team!%20I%27m%20interested%20in%20your%20corporate%20gifting%20solutions.%20Please%20share%20your%20catalog%20or%20help%20me%20with%20a%20custom%20gifting%20plan%20for%20my%20company.%20Thanks!",
-                  "_blank"
+                  "_blank",
                 )
               }
             >
               DOWNLOAD CATALOGUE
             </span>
             <span className="text-xl text-white">|</span>
-              <Link
-                to="/privact-policy"
-                className="text-white text-xs md:text-md cursor-pointer"
-              >
-                PRIVACY POLICY
-              </Link>{" "}
+            <Link
+              to="/privact-policy"
+              className="text-white text-xs md:text-md cursor-pointer"
+            >
+              PRIVACY POLICY
+            </Link>{" "}
           </div>
         </div>
 
         {/* Logo positioned in top right */}
         <div
           className={cn(
-            "absolute top-2.5 right-1/2 translate-x-1/2 md:right-12 md:translate-0 z-20"
+            "absolute top-2.5 right-1/2 translate-x-1/2 md:right-12 md:translate-0 z-20",
           )}
         >
           <img
             src="/images/Logo.webp"
             alt="Reethi Logo"
+            loading="lazy"
             style={{
               height: "101px",
               width: "auto",
@@ -171,6 +184,7 @@ const Footer: React.FC = () => {
         <img
           src="/images/left_foot_pic.svg"
           alt="Left decoration"
+          loading="lazy"
           className="absolute left-0 top-1/2 -translate-y-1/3 h-full w-auto hidden md:block"
         />
 
