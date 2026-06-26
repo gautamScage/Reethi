@@ -2,12 +2,19 @@ const WhatsappCTA = () => {
   return (
     <div
       className="fixed bottom-10 right-10 z-50 group cursor-pointer"
-      onClick={() =>
+      onClick={() => {
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "conversion", {
+            send_to: "AW-17385050461/dsPFCJ3OiMQcEN2i6-FA",
+            value: 1.0,
+            currency: "INR",
+          });
+        }
         window.open(
           "https://wa.me/9958100762?text=Hi%20Reethi%20Gifts%20team!%20I%27m%20interested%20in%20your%20corporate%20gifting%20solutions.%20Please%20share%20your%20catalog%20or%20help%20me%20with%20a%20custom%20gifting%20plan%20for%20my%20company.%20Thanks!",
           "_blank",
-        )
-      }
+        );
+      }}
     >
       <span className="absolute bottom-full right-0 mb-3 bg-[#2c3e2d] text-white text-xs font-medium rounded-lg px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg pointer-events-none">
         Chat with us on WhatsApp

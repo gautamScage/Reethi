@@ -102,7 +102,6 @@ const Footer: React.FC = () => {
 
             {/* WhatsApp Icon */}
             <div
-              title="Chat with us on WhatsApp"
               className="w-8 md:w-12 h-8 md:h-12 bg-[#A4B465] rounded-full flex justify-center items-center cursor-pointer"
               onClick={() => window.open("tel:+919958100762")}
             >
@@ -161,7 +160,7 @@ const Footer: React.FC = () => {
           )}
         >
           <img
-            src="/images/Logo.webp"
+            src="/images/Reethi-Gifts_Logo_Green_nobg.png"
             alt="Reethi Logo"
             loading="lazy"
             style={{
